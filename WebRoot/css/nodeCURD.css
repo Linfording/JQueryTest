@@ -1,0 +1,11 @@
+#dadDiv{
+		border:#0099FF 1px solid; height:900px; width:450px; margin:20px 0px 20px 20px; padding:10px 0px 0px 20px; 
+	}
+	div { border:#0099FF 1px solid; height:60px; width:120px; margin:20px 0px 20px 20px; padding:10px 0px 0px 20px; }
+	#div_1{ background-color:#00FFFF; }
+		
+	#div_2{ background-color:#FF3399;}
+		
+	#div_3{ background-color:#0000FF; }
+		
+	#div_4{ background-color:#FFFF66; }

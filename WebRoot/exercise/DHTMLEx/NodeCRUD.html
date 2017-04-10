@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>节点的增删改查</title>
+<!--加入样式表-->
+<link rel="stylesheet" href="../../css/nodeCURD.css" />
+<script type="text/javascript">
+	var replaceNode=document.createElement("div");
+		replaceNode.innerHTML="我是替换节点";
+	//添加节点
+	function addNode(){
+		//1.创建节点
+		var newNode=document.createElement("div");
+		newNode.innerHTML="我是新增的节点";
+		//2.获取父节点
+		var dadNode=document.getElementById("dadDiv");
+		//3.将新增节点挂到父节点上
+		dadNode.appendChild(newNode);
+	}
+
+	//删除节点
+	function deleteNode(){
+		//1.获取父节点
+		var dadNode=document.getElementById("dadDiv");
+		//2.获取要删除的节点
+		var childes=dadNode.getElementsByTagName("div");
+		//3.从父节点移出该节点
+		if(childes.length>0){
+			dadNode.removeChild(childes[0]);
+		}else{
+			alert("没有可删除的节点");
+		}
+	}
+
+	//更新节点
+	function updateNode(){
+		//创建新节点
+		//1.创建节点
+		//var newNode=document.createElement("div");
+		//newNode.innerHTML="我是替换节点";
+		//2.获取要替换的节点
+		var body=document.getElementsByTagName("body")[0];
+		var divNode1=document.getElementsByTagName("div")[0];
+		body.replaceChild(replaceNode, divNode1);
+		replaceNode=divNode1;
+		
+	}
+
+	//克隆节点
+	function copyNode(){
+		var div2=document.getElementById("div_2");
+		var newNode=div2.cloneNode(true);
+		var dadNode=document.getElementById("dadDiv");
+		dadNode.appendChild(newNode);
+	}
+
+
+</script>
+
+</head>
+
+
+
+<body>
+    <div id="div_1" class="div">
+		
+    </div>
+    
+    <div id="div_2" class="div">
+    div区域2
+    </div>
+    
+    <div id="div_3" class="div">
+   	 div区域3
+    </div>
+    
+    <div id="div_4" class="div">
+    div区域4
+    </div>
+    
+    <hr />
+    <input type="button" value="创建并添加节点" onclick="addNode()" ></input>
+    <input type="button" value="删除节点" onclick="deleteNode()" ></input>
+    <input type="button" value="替换节点" onclick="updateNode()" ></input>
+    <input type="button" value="克隆节点" onclick="copyNode()" ></input>
+	<div id="dadDiv" >父p</div>
+	
+</body>
+</html>

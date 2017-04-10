@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>全选反选问题</title>
+<script>
+	window.onload = function(){	//当页面加载完成后获取所有的item
+		var checkBoks=document.getElementsByName("item");
+		for(var i=0;i<checkBoks.length;i++){
+		//给每一个checkboxs添加点击事件
+			checkBoks[i].onclick=function () {
+			//判断checkbox是否被选中
+				var flag=true;
+				for(var j=0;j<checkBoks.length;j++){
+					if(!checkBoks[j].checked){
+						flag=false;
+					}
+				}
+				
+				document.getElementById("all1").checked=flag;
+			}
+		}
+	}
+
+	function checkAll(obj){
+		var checkBoks=document.getElementsByName("item");
+		for(var i=0;i<checkBoks.length;i++){
+			checkBoks[i].checked=obj.checked;
+		}
+	}
+	
+
+	function check(){
+		//反选
+		var checkBoks=document.getElementsByName("item");
+		for(var i=0;i<checkBoks.length;i++){
+			checkBoks[i].checked=!checkBoks[i].checked;
+		}
+
+		var flag = true;
+		for(var j=0; j<checkBoks.length; j++){
+			if(!checkBoks[j].checked){
+				flag = false;
+			}
+		}
+		document.getElementById("all1").checked = flag;
+	}
+
+	function getSum(){
+		var checkBoks=document.getElementsByName("item");
+		var sum=0;
+		for(var i=0;i<checkBoks.length;i++){
+			if(checkBoks[i].checked){
+				sum+=parseFloat(checkBoks[i].value);	
+			}
+		}
+		document.getElementById("sumId").innerHTML=sum;
+	}
+
+	
+</script>
+</head>
+
+<body>
+<div>商品列表</div>
+<input type="checkbox" name="item" value="3000" />笔记本3000元<br />
+<input type="checkbox" name="item" value="2500"/>HTC手机2500<br />
+<input type="checkbox" name="item" value="8000" />苹果电脑8000<br />
+<input type="checkbox" name="item" value="1500" />IPAD1500<br />
+<input type="checkbox" name="item" value="400" />玩具汽车400<br />
+
+<input type="checkbox" id="all1" name="all" onclick="checkAll(this)"/>全选<br />
+<input type="checkbox" id="all2" name="all" onclick="check()"/>反选<br />
+
+<input type="button" value="总金额" onclick="getSum()" /><span id="sumId"></span>
+</body>
+</html>
