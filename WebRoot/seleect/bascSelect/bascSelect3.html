@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>bascSelect3.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<style type="text/css">
+	div{
+		border: 1px solid #000000;
+		
+	}
+</style>
+<script src="../../js/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	$().ready(function(){
+	
+		//层级选择器
+		$("#b1").click(function(){
+			//改变body内所有的div元素
+			$("body div").css("background","red");
+		});
+		
+		$("#b2").click(function(){
+		//改变body内 子div的背景
+			$("body>div").css("background","blue");
+		});
+		
+		$("#b3").click(function(){
+		//id为one的下一个div
+			$("#one+div").css("background","green");
+		});
+		
+		//可见性选择器
+		$("#b4").click(function(){
+		//选择隐藏域，
+		//含有title的属性的div，
+		//id为one，class为one的元素(并集)
+			//$("input[type=hidden],div[title],#one,.one").css("background","green");
+			$(":hidden,div[title],#one,.one").css("background","orange");
+			//选择可见
+			//$(":visible,div[title],#one,.one").css("background","green");
+		});
+		
+		
+		$("#b5").click(function(){
+		//改变id为two的元素后面的所有兄弟div的背景
+			$("#two~div").css("background","gray");
+		});
+		
+		$("#b6").click(function(){
+		//改变id为two的所有兄弟div的背景
+			$("#two").siblings("div").css("background","yellow");
+		});
+		
+		$("#b7").click(function(){
+		//改变id为two的所有兄弟div的背景
+			$("#two").parent().children("div").css("background","#ccccbc");
+		});
+		
+		
+	});
+	</script>
+</head>
+
+<body>
+	<input type="button" value="改变body内所有的div元素" id="b1"></input>
+	<input type="button" value="改变tbody内子div的景" id="b2"></input>
+	<input type="button" value="id为one的下一个div" id="b3"></input>
+	<input type="button" value="选择隐藏域，含有title的属性的div，id为one，class为one的元素" id="b4"></input>
+	<input type="button" value="改变id为two的元素后面的所有兄弟div的背景" id="b5"></input>
+	<input type="button" value="改变id为two的所有兄弟div的背景" id="b6"></input>
+	<input type="button" value="改变id为two的所有兄弟div的背景包括two" id="b7"></input>
+	<input type="hidden" value="隐藏域" ></input>
+	
+	<div id="one" title="t">
+		id为one test01
+		<div >
+		one的子元素div
+	</div>
+	</div>
+	<div id="two" title="test02">
+		id为two test02
+		<div >
+		two的子元素div
+	</div>
+	</div>
+	<div class="mini">
+		class为mini
+	</div>
+	
+	<div id="three" title="t3">
+		id为three title=t3
+	</div>
+	
+	<span>
+		我是个span
+			<div >
+			span的子元素div
+			</div>
+	</span>
+</body>
+</html>

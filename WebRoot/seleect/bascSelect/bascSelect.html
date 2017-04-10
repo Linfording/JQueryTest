@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>bascSelect.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script src="../../js/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	$().ready(function(){
+		//click触发每一个匹配元素的click事件。
+		//这个函数会调用执行绑定到click事件的所有函数。
+		
+		//为id值是b1的button添加一个click事件
+		$("#b1").click(function(){
+			//改变id为one的元素的背景元素
+			$("#one").css("background","red");
+			//改变id为one的元素的文字颜色
+			//$("#one").css("color","red");
+		});
+		
+		//选择器
+		//id选择器
+		$("#b2").click(function(){
+			$("div").css("background","blue");
+		});
+		
+		//class选择器
+		$("#b3").click(function(){
+			$(".mini").css("background","green");
+		});
+		
+		//所有元素
+		$("#b4").click(function(){
+			$("*").css("background","orange");
+		});
+		
+		//组合选择器
+		$("#b5").click(function(){
+			//改变span和div元素的背景色
+			$("div,span").css("background","yellow");
+			//改变span和id为two的元素的文字色
+			$("span,#two").css("color","red");
+		});
+		
+		//组合
+		$("#b6").click(function(){
+			//改变span和id为two，one，class为mini的元素的背景色
+			$("span,#one,#two,.mini").css("background","gray");
+		});
+	});
+	</script>
+</head>
+
+<body>
+	<input type="button" value="改变id为b1的背景色" id="b1"></input>
+	<input type="button" value="改变元素名为div的所有背景色" id="b2"></input>
+	<input type="button" value="改变class为mini的元素的背景色" id="b3"></input>
+	<input type="button" value="改变c所有元素的背景色" id="b4"></input>
+	<input type="button" value="改变span和id为two的元素的背景色" id="b5"></input>
+	<input type="button" value="改变span和id为two，one，class为mini的元素的背景色" id="b6"></input>
+	<div id="one">
+		id为one
+	</div>
+	<div id="two">
+		id为two
+	</div>
+	<div class="mini">
+		class为mini
+	</div>
+	
+	<span>
+		我是个span
+	</span>
+</body>
+</html>

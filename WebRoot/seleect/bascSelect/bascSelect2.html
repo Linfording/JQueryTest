@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>bascSelect2.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script src="../../js/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	$().ready(function(){
+	
+		//属性选择器
+		$("#b1").click(function(){
+			//改变含有title属性的div元素
+			$("div[title]").css("background","red");
+		});
+		
+		$("#b2").click(function(){
+		//改变title属性为test02的div元素背景
+			$("div[title=test02]").css("background","blue");
+		});
+		
+		$("#b3").click(function(){
+		//选择有属性id的div元素，然后在结果中选取属性title值含有“es”的div(交集)
+			$("div[id][title*=es]").css("background","green");
+		});
+		
+		$("#b4").click(function(){
+		//选择隐藏域，
+		//含有title的属性的div，
+		//id为one，class为one的元素(并集)
+			//$("input[type=hidden],div[title],#one,.one").css("background","green");
+			$(":hidden,div[title],#one,.one").css("background","green");
+		});
+		
+	});
+	</script>
+</head>
+
+<body>
+	<input type="button" value="改变含有title属性的div元素" id="b1"></input>
+	<input type="button" value="改变title属性为test02的div元素背景" id="b2"></input>
+	<input type="button" value="选择有属性id的div元素，然后在结果中选取属性title值含有“es”的div" id="b3"></input>
+	<input type="button" value="选择隐藏域，含有title的属性的div，id为one，class为one的元素" id="b4"></input>
+	
+	<input type="hidden" value="隐藏域" ></input>
+	
+	<div id="one" title="t">
+		id为one test01
+	</div>
+	<div id="two" title="test02">
+		id为two test02
+	</div>
+	<div class="mini">
+		class为mini
+	</div>
+	
+	<div id="three" title="t3">
+		id为three title=t3
+	</div>
+	
+	<span>
+		我是个span
+	</span>
+</body>
+</html>

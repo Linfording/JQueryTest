@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>全选反选.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script src="../js/jquery-1.4.2.js"></script>
+	<script type="text/javascript">
+		$().ready(function() {
+			//全选
+			$("#all1").click(function () {
+				if($(this).attr("checked")){//被选中时
+					$("input[name=item]").attr("checked",true);
+				}else{//未被选中
+					$("input[name=item]").attr("checked",false);
+				}
+			});
+			
+			//反选
+			$("#all2").click(function () {
+				$("input[name=item]").each(function () {
+					$(this).attr("checked",!$(this).attr("checked"));
+				});
+				isAll();
+			});
+			
+			//总金额
+			$("#sumId").click(function() {
+					var sum=0;
+				$("input[name=item]:checked").each(function () {
+					sum+=parseFloat($(this).val());					
+				});
+				$("#sumsp").text("总金额为:"+sum);
+			});
+			
+			$("input[name=item]").click(function () {
+				isAll();
+			}); 
+			//判断是否全选
+			function isAll(){
+				var isAllCheck=true;
+				$("input[name=item]").each(function(i){
+					if(!$(this).attr("checked")){
+						isAllCheck=false;
+					}
+				});
+				$("#all1").attr("checked",isAllCheck);
+			}
+		});
+	</script>
+  </head>
+  
+  <body>
+    <div>商品列表</div>
+	<input type="checkbox" name="item" value="3000" />笔记本3000元<br />
+	<input type="checkbox" name="item" value="2500"/>HTC手机2500<br />
+	<input type="checkbox" name="item" value="8000" />苹果电脑8000<br />
+	<input type="checkbox" name="item" value="1500" />IPAD1500<br />
+	<input type="checkbox" name="item" value="400" />玩具汽车400<br />
+	
+	<input type="checkbox" id="all1" name="all"/>全选<br />
+	<input type="checkbox" id="all2" name="all"/>反选<br />
+		
+	<input type="button" id="sumId" value="总金额" />
+	<span id="sumsp"></span>
+  </body>
+</html>

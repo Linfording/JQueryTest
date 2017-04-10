@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>visibleSelect3.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<style type="text/css">
+	div{
+		border: 1px solid #000000;
+		
+	}
+</style>
+<script src="../../js/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	$().ready(function(){
+		//可见性
+		$("#b1").click(function(){
+			//改变body内所有的div元素
+			$("div:visible").css("background","red");
+		});
+		
+		$("#b2").click(function(){
+			//选取所有不可见的元素，
+			//利用jQuery中的show()方法将他们显示出来，并设置其背景色为#0000FF
+			//$(":hidden")返回的是一个jQuery对象数组
+			$(":hidden").show().css("background","#0000FF");
+			
+		});
+		
+		$("#b3").click(function(){
+			//选择文本隐藏域，并打印其value值
+			//each为遍历当前的jquery对象，i为当前遍历的下标
+			$("input:hidden").each(function(i){
+			//this为当前正在遍历的元素对象
+			//该this为dom对象
+				//alert(this.value);
+				//转为jquery对象
+				alert($(this).val());
+			});
+		});
+		
+		$("#b3").click(function(){
+			//选择文本隐藏域，并打印其value值
+			//第一个参数代表要遍历的对象
+			//第二个参数是一个函数，代表遍历时要做的事情
+			$.each($("input:hidden"),function(){
+				alert($(this).val());
+			});
+		});
+		
+	});
+	</script>
+</head>
+
+<body>
+	<input type="button" value="改变所有可见的div元素" id="b1"></input>
+	<input type="button" value="选取所有不可见的元素,利用jQuery中的show()方法将他们显示出来，并设置其背景色为#0000FF" id="b2"></input>
+	<input type="button" value="选择文本隐藏域，并打印其value值" id="b3"></input>
+	<input type="button" value="选择文本隐藏域，并打印其value值第二种写法 id="b4"></input>
+	<input type="button" value="改变id为two的元素后面的所有兄弟div的背景" id="b5"></input>
+	<input type="button" value="改变id为two的所有兄弟div的背景" id="b6"></input>
+	<input type="button" value="改变id为two的所有兄弟div的背景包括two" id="b7"></input>
+	<!--文本隐藏域-->
+	<input type="hidden" value="隐藏域1" ></input>
+	<input type="hidden" value="隐藏域2" ></input>
+	
+	<div id="one" title="t">
+		id为one test01
+		<div >
+		one的子元素div
+	</div>
+	</div>
+	<div id="two" title="test02">
+		id为two test02
+		<div >
+		two的子元素div
+	</div>
+	<div class="mini" >
+		class为mini
+	</div>
+	</div>
+	
+	<div id="three" title="t3">
+		id为three title=t3
+	</div>
+	
+	<span>
+		我是个span
+			<div >
+			span的子元素div
+			</div>
+	</span>
+</body>
+</html>

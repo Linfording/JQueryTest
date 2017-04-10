@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>domjquery.html</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script src="../js/jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	window.onload=function(){
+	
+		var dom=document.getElementById("username");
+		//alert(dom.value);
+		var $username=$(dom);
+		//alert($username.value);//输出值为undefined，说明￥username没有value属性
+		alert($username.val());//jquery api
+		
+		//js中
+		var dom=document.getElementById("user");
+		alert(dom);//null
+		if (dom) {//如果dom为null，undefinded，放入到if语句中，最终的值为false
+			alert("a");
+		}else{
+			alert("b");
+		}
+		
+		//jquer中
+		//把一个null转化为jquery对象
+		var $dom= $(dom);
+		//jquery对象是一个数组对象，当把一个null或者undefined的变量转化成jquery对象的时候
+		//该数组中没有内容，所以长度为0，所以jquery对象本身不能为放入if判断是否有值
+		alert($dom);
+		if ($dom) {//object,object
+			alert("a");
+		}else{
+			alert("b");
+		}
+		
+		
+		//1.dom转化jQuery对象
+		//2.jquery
+	}
+	</script>
+</head>
+
+<body>
+	<input type="text" name="username" value="aaa" id="username"></input>
+	<br>
+</body>
+</html>
