@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>二级联动菜单</title>
+	<!-- 
+	注意: 
+		ie10以下的浏览器不支持 select,table上的innerHTML属性
+		删除option时，由于删除后，options长度发生了变化，所以直接用for循环会有漏删的情况，可以由后向前删除，可以避免这样的问题
+	-->
+<script src="../../js/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+	var data={
+	"北京市": ["海淀区","朝阳区","丰台区"],
+	"河北省": ["石家庄","唐山","秦皇岛"],
+	"辽宁省": ["沈阳","大连","鞍山"],
+	"山东省": ["青岛","济南","烟台"]
+	};
+
+	$().ready(function (){
+		$("select[name=country]").change(function(){
+			alert($(this).val());
+		});
+		
+		$("#province").change(function(){
+			var citys=data[this.value];
+			//清除citys内容
+			clearCity();			
+			//添加到citys列表
+			$.each(citys,function(){
+			//alert($.type(this));
+			$("#city").append($("<option/>").text(this));
+			});
+		});
+		function clearCity(){
+			var $ops=$("#city option");
+			var len=$ops.length;
+			for(var i=1;i<len;i++){
+				$ops.eq(i).remove();
+			}
+		}
+	});
+</script>
+</head>
+<!--
+	"北京市": ["海淀区","朝阳区","丰台区"]
+	"河北省": ["石家庄","唐山","秦皇岛"]
+	"辽宁省": ["沈阳","大连","鞍山"]
+	"山东省": ["青岛","济南","烟台"]
+-->
+<body>
+	
+	<select name="country"  >
+		<option value="none">--选择国家--</option>
+		<option value="中国">中国</option>
+		<option value="美国">美国</option>
+		<option value="日本">日本</option>
+	</select>
+	<br><br>
+	<hr/>
+	<br>
+	<div id="seleDiv">
+		<select id="province">
+			<option>--选择省市--</option>
+			<option>北京市</option>
+			<option>河北省</option>
+			<option>辽宁省</option>
+			<option>山东省</option>
+		</select>
+		<span id="citySpan">
+			<select id="city">
+				<option>--选择城市--</option>
+			</select>
+		</span>
+	</div>
+</body>
+
+</html>

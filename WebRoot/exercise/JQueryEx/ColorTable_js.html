@@ -35,6 +35,21 @@
 	<script src="../../js/jquery-1.4.2.js"></script>
 	<script type="text/javascript">
 		$().ready(function () {
+			var classna;
+			//tr初始颜色
+			$("tr:even").toggleClass("one");
+			$("tr:odd").toggleClass("two");
+			//事件
+			$("tr").mouseover(function(){
+				alert($(this).css());				
+				$(this).toggleClass("over");
+			});
+			
+			$("tr").mouseout(function(){
+				//toggleClass如果存在（不存在）就删除（添加）一个类。
+				$(this).toggleClass("over");
+			});
+			
 		});
 	</script>
 </head>

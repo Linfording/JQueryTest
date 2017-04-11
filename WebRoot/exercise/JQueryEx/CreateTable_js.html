@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>表格的操作</title>
+	<style type="text/css">
+		table {
+			border:#0099FF 1px solid;
+			width:500px;
+			border-collapse:collapse;
+		}
+		table th, table td {
+			border:#0099FF 1px solid;
+			padding:10px 0px 10px 10px;
+		}
+		table th {
+			background-color:#00CCFF;
+		}
+
+		.one {
+			background-color:#CCFF66;
+		}
+		.two {
+			background-color:#897af1;
+		}
+		.over {
+			background-color:#FF0000;
+		}
+		div{
+			text-align: center;
+			padding:20px;
+			color:red;
+		}
+	</style>
+	<script src="../../js/jquery-1.4.2.js"></script>
+	<script type="text/javascript">
+	var table={
+			data:[
+					{	name:"变形金刚",
+						detaile:"很不错的电影",
+						supername:"机器人"},
+					{	name:"少林足球",
+						detaile:"最厉害的足球电影",
+						supername:"周星驰,赵薇"},
+					{	name:"赌神",
+						detaile:"小马哥演绎赌神",
+						supername:"周润发"},
+					{	name:"大话西游",
+						detaile:"超级搞笑的电影",
+						supername:"周星驰"},
+					{	name:"疯狂的石头",
+						detaile:"一部让人大笑不止的电影",
+						supername:"黄渤"}
+			      ],
+	};
+	function createTd(tdtext){
+		return $("<td/>").text(tdtext);
+	}
+	function createTr(tds){
+		var $tr=$("<tr/>");
+		//$.
+		$.each(tds,function(){
+			$tr.append($(this));
+		});
+		
+		return $tr;
+	}
+	function createTable(){
+		for(var i=0;i<table.data.length;i++){
+			var name=table.data[i].name;
+			var detaile=table.data[i].detaile;
+			var supername=table.data[i].supername;
+
+			var $tdID=createTd(name);
+			var $tddetaile=createTd(detaile);
+			var $tdsupername=createTd(supername);
+
+			var $tds=[$tdID,$tddetaile,$tdsupername];
+			
+			$("table").append(createTr($tds));
+		}
+	}
+	$().ready(function(){
+		createTable();
+	});
+	</script>
+</head>
+<body>
+	<table align="center">
+		<tr>
+			<th>电影名称</th>
+			<th>电影介绍</th>
+			<th>主演名单</th>
+		</tr>
+
+	</table>
+</body>
+</html>

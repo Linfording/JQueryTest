@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>创建表格</title>
+<!-- 定义一些样式,将来给表格用 -->
+<style type="text/css">
+table{
+	border:#0099FF 1px solid;
+	width:600px;
+	border-collapse:collapse;
+}
+	
+table td{
+	border:#0099FF 1px solid;
+	padding:10px 20px 3px 1px; 
+}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		var tab=document.getElementById("tab");
+		//若放在onload外，则方法无法访问到，因为js是脚本语言，顺序加载下来的，此时还没有tab
+		//想把tab作为全局变量，只能放在onload内去操作
+	}
+		//创建单行单列的表格
+		function createTable(){
+			var table=document.createElement("table");
+			var tr=document.createElement("tr");
+			var td=document.createElement("td");
+			td.innerHTML="单行单列表格";
+			tr.appendChild(td);
+			table.appendChild(tr);
+			tab.appendChild(table);
+		}
+	
+		//创建5行6列的表格
+		function createTable2(){
+			/* var table=document.createElement("table");
+			var tr;
+			for(var i=0;i<5;i++){
+				tr=document.createElement("tr");
+				var td;
+				for(var j=0;j<6;j++){
+					td=document.createElement("td");
+					td.innerHTML="第"+i+"行第"+j+"列";
+					tr.appendChild(td);
+				}
+				table.appendChild(tr);
+			}
+			tab.appendChild(table); */
+			createTab(5,6);
+		}
+	
+		//创建指定行和列的表格
+		function createTable3(){
+			var row=document.getElementById("row");
+			var col=document.getElementById("col");
+			createTab(row.value,col.value);
+		}
+		
+		function createTab(row,col){
+				var table=document.createElement("table");
+			var tr;
+			for(var i=0;i<row;i++){
+				tr=document.createElement("tr");
+				var td;
+				for(var j=0;j<col;j++){
+					td=document.createElement("td");
+					td.innerHTML="第"+(i+1)+"行第"+(j+1)+"列";
+					tr.appendChild(td);
+				}
+				table.appendChild(tr);
+			}
+			tab.appendChild(table);
+		}
+	
+</script>
+</head>
+<body>
+	<input type="button" value="创建表格" onclick="createTable()" /><br />
+
+	<input type="button" value="创建表格(5行6列)" onclick="createTable2()" /><br />
+
+	行数:<input type="text" name="row" id="row"/><br />
+	列数:<input type="text" name="col" id="col"/><br />
+	<input type="button" name="createButton" value="创建表格(行列用户输入)" onclick="createTable3()" />
+	<div id="tab">
+			
+	</div>
+</body>
+</html>
