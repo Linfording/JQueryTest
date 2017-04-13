@@ -13,37 +13,128 @@
 		<script type="text/javascript">
 			$().ready(function(){
 				$("span").addClass("font");
-			
+				
+				//input:radio是否选中
+				//alert($("input:radio[name=gender]:checked").val());
+				//var isNullCount=$("form tr").length-1;
+				//alert(isNullCount);
+				//alert($("#password_msg").prev());
 				$("form input").blur(function(){
 					if($(this).is("input[name=username]")){
-						if($(this).val()==""){
-							setMsg("#username_msg","请输入用户名");
-						}
+						isNull("#username_msg","请输入用户名");
 					}
 					if($(this).is("input[name=password]")){
-						if($(this).val()==""){
-							setMsg("#password_msg","请输入密码");
-						}
+						checkpassword("#password_msg","请输入密码");
 					}
 					if($(this).is("input[name=password2]")){
-						if($(this).val()==""){
-							setMsg("#password2_msg","请输入密码");
-						}
+						checkpassword("#password2_msg","请输入密码");
 					}
 					if($(this).is("input[name=nickname]")){
-						if($(this).val()==""){
-							setMsg("#nickname_msg","请输入昵称");
-						}
+						isNull("#nickname_msg","请输入昵称");
 					}
 					if($(this).is("input[name=email]")){
-						if($(this).val()==""){
-							setMsg("#email_msg","请输入邮箱");
-						}else{
-							if(!/^\w+@\w+(\.\w+)+$/.test($(this).val())){
-								setMsg("#email_msg","请输入正确的邮箱");
-							}
+						checkEmail("#email_msg","请输入邮箱");
+					}
+					if($(this).is("input[name=valistr]")){
+						checkValistr("#valistr_msg","请输入验证码");
+					}
+				});
+				function checkpassword(name,msg){
+					setMsg(name,"");
+					if($.isEmptyObject($(name).prev().val())){
+						setMsg(name,msg);
+						return false;
+					} else{
+						var psw=$("input[name=password]").val();
+						var psw2=$("input[name=password2]").val();
+						if(psw2!= "" && psw != psw2){
+							setMsg("#password2_msg","两次密码不一致");
+							return false;
+						}else if (psw == psw2) {
+							setMsg("#password2_msg","");
+							return true;
 						}
 					}
+				}
+				
+				function checkValistr(name,msg){
+					setMsg(name,"");
+					if($("input[name=valistr]").val()==""){
+						setMsg(name,"请输入验证码");
+						return false;
+					}
+					return true;
+				}
+				
+				function checkEmail(name,msg){
+					setMsg(name,"");
+					if($("input[name=email]").val()==""){
+						setMsg(name,msg);
+						return false;
+					}else{
+						if(!/^\w+@\w+(\.\w+)+$/.test($("input[name=email]").val())){
+							setMsg(name,"请输入正确的邮箱");
+							return false;
+						}
+						return true;
+					}
+				}
+				function isNull(name,msg){
+					setMsg(name,"");
+					if($.isEmptyObject($(name).prev().val())){
+						setMsg(name,msg);
+						return false;
+					}
+					return true;
+				}
+				
+				function checkGender(){
+						//input:radio是否选中
+				//alert($("input:radio[name=gender]:checked").val());
+					if($.isEmptyObject($("input:radio[name=gender]:checked").val())){
+					//空则说明没有选择性别
+						alert("请选择性别");
+						return false;
+					}
+					return true;
+				}
+				
+				function checklike(){
+					if($.isEmptyObject($("input:checkbox[name=like]:checked").val())){
+					//空则说明没有选择爱好
+						alert("请选择爱好");
+						return false;
+					}
+					return true; 
+				}
+				function checkimg(){
+					if($.isEmptyObject($("input:file").val())){
+					//空则说明没有上传头像
+						alert("请上传头像");
+						return false;
+					}
+					return true; 
+				}
+				//提交判断空
+				$("form").submit(function(){
+					var flag=true;					 
+					flag=flag&isNull("#username_msg","请输入用户名")&checkpassword("#password_msg","请输入密码")
+					&checkpassword("#password2_msg","请输入密码")&isNull("#nickname_msg","请输入昵称")
+					&checkEmail("#email_msg","请输入邮箱")&checkValistr("#valistr_msg","请输入验证码")&checkGender()
+					&checklike()&checkimg();
+					return flag; 
+				}); 
+				
+				//textare为空判断
+				$("textarea").blur(function(){
+					if($(this).val()==""){
+							$("#desc").val("请输入描述信息");
+						}
+				});
+				$("textarea").focus(function(){
+					if($(this).val()=="请输入描述信息"){
+							$("#desc").val("");
+						}
 				});
 				
 			});
@@ -54,7 +145,7 @@
 		</script>
 	</head>
 	<body>
-		<form action="http://localhost:8080" method="POST" onsubmit="return checkForm()" >
+		<form action="http://localhost:8080" method="POST"  >
 			<table border="1px" align="center" cellpadding="10px" cellspacing="0px" borderColor="red" bgcolor="pink">
 				<caption><font color="red" size="6">注册表单</font></caption>
 				<input type="hidden" name="id" value="9527"/>
@@ -134,14 +225,14 @@
 				<tr>
 					<td>描述信息：</td>
 					<td>
-						<textarea id="desc" rows="5" cols="45" name="desc" onblur="onblurTA(this)" onfocus="onfocusTA(this)">请输入描述信息~！</textarea>
+						<textarea id="desc" rows="5" cols="45" name="desc" >请输入描述信息</textarea>
 						<span id="desc_msg" ></span>
 					</td>
 				</tr>
 				<tr>
 					<td>验证码：</td>
 					<td>
-						<input type="text" name="valistr"  onblur="checkNull('valistr', '验证码不能为空')"/>
+						<input type="text" name="valistr" />
 						<img src="1.jpg" width="100px" height="20px"/>
 						<span id="valistr_msg" ></span>
 					</td>
